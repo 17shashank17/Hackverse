@@ -51,7 +51,7 @@ def get_nearest_safe_location(request):
             min_dist = h
             loc = obj
     if loc is None:
-        return JsonResponse()
+        return JsonResponse({})
     return JsonResponse({
         'latitude'  : loc.latitude,
         'longitude' : loc.longitude
