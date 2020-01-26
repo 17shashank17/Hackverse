@@ -130,11 +130,11 @@ class App extends Component{
       position => {
         const location = position;
         this.setState({location:location});
-        this.state.latitude=this.state.location.coords.latitude;
-        this.state.longitude=this.state.location.coords.longitude;
-        var lat=this.state.location.coords.latitude;
         var long=this.state.location.coords.longitude;
         
+        var lat=this.state.location.coords.latitude;
+        this.state.latitude=this.state.location.coords.latitude;
+        this.state.longitude=this.state.location.coords.longitude;
         fetch(`http://hackverse-gods.herokuapp.com/get_nearest_safe_location?latitude=${lat}&longitude=${long}`)
         .then(response=>{
           return response.json()
@@ -165,6 +165,7 @@ class App extends Component{
     
     return (
         <View style={styles.container}>
+
           <ScrollView>
           <Text style={[styles.text_style,styles.text_style_heading]}>Your Location Coordinates</Text>
           <Text style={styles.text_style}>{ this.state.latitude } lat {this.state.longitude} long</Text>
@@ -226,6 +227,7 @@ const styles = StyleSheet.create({
     margin: 100,
   },
   button_container: {
+    padding: 20,
     justifyContent: 'space-between',
   }
   

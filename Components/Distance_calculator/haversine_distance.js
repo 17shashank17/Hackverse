@@ -5,7 +5,6 @@ export default function haversineDistance(lat1, lon1,lat2,lon2) {
     function toRad(x) {
       return x * Math.PI / 180;
     }
-    console.warn(lat1,lon1,lat2,lon2)
   
     var R = 6371; // km
   
@@ -18,6 +17,5 @@ export default function haversineDistance(lat1, lon1,lat2,lon2) {
       Math.sin(dLon / 2) * Math.sin(dLon / 2);
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     var d = R * c;
-    console.warn(d)
     return d;
   }

@@ -77,9 +77,9 @@ export default class Compass extends Component{
                 }}
                 source={require('../../assets/compass_image.png')}  />
                 {/* <Text>Magnetometer : {this.state.magnetometer_text}</Text> */}
-                
+                <View style={styles.button}>
                 <Button title="Get Nearest Location" onPress={this.getMagnetometer.bind(this)}></Button>
-                <Text></Text>
+                </View>
             </View>
                 
             

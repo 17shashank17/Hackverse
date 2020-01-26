@@ -11,5 +11,8 @@ export default styles=StyleSheet.create({
         width: 300,
         height: 300,
 
+    },
+    button: {
+        padding: 20
     }
 })
