@@ -8,5 +8,4 @@ urlpatterns = [
     path('get_all_safe_locations', get_all_safe_locations),
     path('get_stats', get_stats),
     path('sos_distress', sos_distress)
-
 ]
