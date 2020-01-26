@@ -54,9 +54,20 @@ class App extends Component{
       heading_angle: 0,
       latitude: 0,
       longitude: 0,
+      latitude_dest:0,
+      longitude_dest:0,
+      data: {
+        latitude: 0,
+        longitude: 0
+      },
       isLoading: false,
       mark_safe: null,
       mark_unsafe: null,
+    }
+    function update_Distance(){
+          var distance=haversineDistance(data.latitude,data.longitude,this.state.location.coords.latitude,this.state.location.coords.longitude);
+          this.setState({total_distance:distance})
+          this.get_bearing_angle(this.state.location.coords.latitude,this.state.location.coords.longitude,data.latitude,data.longitude)
     }
   }
 
@@ -141,11 +152,17 @@ class App extends Component{
         }).then((data) => {
           
           this.setState({destination_location:[data.latitude,' ',data.longitude]})
+          this.setState({data:data})
 
-          var distance=haversineDistance(data.latitude,data.longitude,this.state.location.coords.latitude,this.state.location.coords.longitude);
-          this.setState({total_distance:distance})
-          this.get_bearing_angle(this.state.location.coords.latitude,this.state.location.coords.longitude,data.latitude,data.longitude)
+          // var distance=haversineDistance(data.latitude,data.longitude,this.state.location.coords.latitude,this.state.location.coords.longitude);
+          // this.setState({total_distance:distance})
+          // this.get_bearing_angle(this.state.location.coords.latitude,this.state.location.coords.longitude,data.latitude,data.longitude)
         })
+        .catch(e=>{
+        })
+          var distance=haversineDistance(this.state.data.latitude,this.state.data.longitude,this.state.location.coords.latitude,this.state.location.coords.longitude);
+          this.setState({total_distance:distance})
+          this.get_bearing_angle(this.state.location.coords.latitude,this.state.location.coords.longitude,this.state.data.latitude,this.state.data.longitude)
       },
       err => console.warn('Move to an open location'),   //raise an alert
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
@@ -182,8 +199,6 @@ class App extends Component{
             <Text>{this.state.mark_safe}</Text>
             <Button style={styles.button} title="Mark Yourself Unsafe" onPress={this.markUnsafe.bind(this)}></Button>
             <Text>{this.state.mark_unsafe}</Text>
-            <Button style={styles.button} title="Find Your Family Member" onPress={this.Sos.bind(this)}></Button>
-            <Text></Text>
             <Button color="red" style={styles.button} title="SOS" onPress={this.Sos.bind(this)}></Button>
 
             {/* <ActivityIndicator animating={this.state.isLoading} size="large" color="#0000ff" /> */}
