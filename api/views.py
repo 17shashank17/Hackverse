@@ -95,3 +95,12 @@ def sos_distress(request):
 
     DistressLocation(latitude=latitude, longitude=longitude).save()
     return HttpResponse()
+
+def get_all_distress_locations(request):
+    res = []
+    for obj in DistressLocation.objects.all():
+        res.append({
+            'latitude'  : obj.latitude,
+            'longitude' : obj.longitude
+        })
+    return JsonResponse(res, safe=False)
